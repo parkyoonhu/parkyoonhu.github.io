@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>박윤후 포트폴리오 — 백엔드 개발</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="image_slot.js"></script>
+<style>
+  :root{
+    --paper:#fbfaf8;
+    --ink:#16171a;
+    --ink2:#4a4c52;
+    --ink3:#8a8c92;
+    --line:#e3e1dc;
+    --soft:#f1efea;
+    --accent:oklch(0.52 0.15 255);
+    --accent-soft:oklch(0.95 0.03 255);
+    --ok:oklch(0.58 0.13 155);
+    --warn:oklch(0.62 0.15 40);
+    --sans:'Pretendard',-apple-system,'Apple SD Gothic Neo',sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#d9d7d2;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;padding:40px 0;word-break:keep-all}
+  .page{width:794px;height:1123px;margin:0 auto 32px;background:var(--paper);position:relative;overflow:hidden;padding:64px 64px 56px;display:flex;flex-direction:column;box-shadow:0 2px 24px rgba(0,0,0,.08)}
+  .pg-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.04em;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:40px}
+  .pg-head b{color:var(--ink);font-weight:500}
+  .pg-foot{margin-top:auto;display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--ink3);padding-top:14px;border-top:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.06em;margin-bottom:12px}
+  h2{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1.3;margin-bottom:8px;text-wrap:pretty}
+  h3{font-size:15px;font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
+  p{font-size:13.5px;line-height:1.75;color:var(--ink2);text-wrap:pretty}
+  .lead{font-size:14.5px;color:var(--ink2);line-height:1.7}
+  .mono{font-family:var(--mono)}
+  .tag{display:inline-block;font-family:var(--mono);font-size:11px;padding:3px 8px;border:1px solid var(--line);border-radius:4px;color:var(--ink2);background:#fff}
+  .tag.acc{border-color:transparent;background:var(--accent-soft);color:var(--accent)}
+  .tag.ok{border-color:transparent;background:oklch(0.95 0.04 155);color:var(--ok)}
+  .tag.wip{border-color:transparent;background:oklch(0.95 0.04 40);color:var(--warn)}
+
+  /* COVER */
+  .cover{padding:0;background:var(--ink);color:#f3f2ef}
+  .cover-inner{padding:72px 64px 56px;display:flex;flex-direction:column;height:100%}
+  .cover .meta{font-family:var(--mono);font-size:12px;color:#8d8f95;letter-spacing:.06em;display:flex;justify-content:space-between}
+  .cover .role{margin-top:180px;font-family:var(--mono);font-size:13px;color:oklch(0.75 0.12 255);letter-spacing:.08em}
+  .cover h1{font-size:76px;font-weight:800;letter-spacing:-.04em;line-height:1;margin:18px 0 28px}
+  .cover .tagline{font-size:24px;font-weight:500;line-height:1.5;letter-spacing:-.02em;color:#e9e8e4;max-width:560px}
+  .cover .tagline em{font-style:normal;color:#fff;background:linear-gradient(transparent 62%,oklch(0.52 0.15 255 / .7) 62%)}
+  .cover .facts{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #33353a}
+  .cover .facts div{padding:22px 0 0}
+  .cover .facts div+div{padding-left:22px;border-left:1px solid #33353a}
+  .cover .facts .n{font-size:34px;font-weight:700;letter-spacing:-.03em}
+  .cover .facts .n small{font-size:15px;font-weight:500;color:#8d8f95;margin-left:3px}
+  .cover .facts .l{font-size:12.5px;color:#a3a5aa;margin-top:4px}
+  .cover .contact{margin-top:44px;display:flex;justify-content:space-between;font-size:13px;color:#c9c8c4;padding-top:18px;border-top:1px solid #33353a}
+  .cover .contact span{font-family:var(--mono);font-size:12.5px}
+
+  /* SUMMARY */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 36px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 18px}
+  .stat .n{font-size:34px;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+  .stat .n small{font-size:15px;font-weight:600;color:var(--ink3);margin-left:2px}
+  .stat .l{font-size:12.5px;color:var(--ink2);margin-top:6px;line-height:1.5}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .kv{display:grid;grid-template-columns:96px 1fr;row-gap:10px;font-size:13px}
+  .kv dt{color:var(--ink3);font-family:var(--mono);font-size:11.5px;padding-top:2px}
+  .kv dd{color:var(--ink);line-height:1.55}
+  .toc{list-style:none;counter-reset:t}
+  .toc li{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .toc li span:last-child{font-family:var(--mono);font-size:11.5px;color:var(--ink3)}
+  .toc li .k{font-family:var(--mono);font-size:11.5px;color:var(--accent);margin-right:10px}
+  .point{margin-top:36px;padding:22px 24px;background:var(--soft);border-radius:10px}
+  .point ol{list-style:none;display:grid;gap:12px;margin-top:4px}
+  .point li{display:grid;grid-template-columns:26px 1fr;font-size:13.5px;line-height:1.6;color:var(--ink)}
+  .point li b{font-family:var(--mono);color:var(--accent);font-weight:500;font-size:12px;padding-top:2px}
+
+  /* PROJECT */
+  .meta-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:10px;background:#fff;margin:24px 0 28px}
+  .meta-grid div{padding:14px 16px}
+  .meta-grid div+div{border-left:1px solid var(--line)}
+  .meta-grid .k{font-family:var(--mono);font-size:10.5px;color:var(--ink3);letter-spacing:.04em}
+  .meta-grid .v{font-size:13.5px;font-weight:600;margin-top:5px;line-height:1.4}
+  .screens{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:12px 0 6px}
+  .scr{height:84px;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;padding:10px 12px;font-family:var(--mono);font-size:11px}
+  .scr.done{background:var(--accent);color:#fff}
+  .scr.todo{background:repeating-linear-gradient(135deg,#fff 0 6px,var(--soft) 6px 12px);border:1px dashed #cfccc5;color:var(--ink3)}
+  .scr b{font-size:20px;font-weight:700;font-family:var(--sans)}
+  .legend{display:flex;gap:16px;font-size:11.5px;color:var(--ink3);font-family:var(--mono);margin-bottom:28px}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+  .sec{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:20px 0;border-top:1px solid var(--line)}
+  .sec .lab{font-family:var(--mono);font-size:11.5px;color:var(--ink3);padding-top:2px;line-height:1.5}
+  .sec .lab b{display:block;color:var(--ink);font-family:var(--sans);font-size:14px;font-weight:700;margin-top:2px}
+  .sec ul{list-style:none;display:grid;gap:8px;margin-top:10px}
+  .sec li{font-size:13.5px;line-height:1.6;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+
+  /* TROUBLESHOOT */
+  .term{background:var(--ink);color:#d8d7d3;border-radius:12px;padding:22px 24px;font-family:var(--mono);font-size:12.5px;line-height:1.85;margin:24px 0 28px}
+  .term .bar{display:flex;gap:6px;margin-bottom:14px}
+  .term .bar i{width:9px;height:9px;border-radius:50%;background:#3a3c41}
+  .term .c{color:#7d7f85}
+  .term .e{color:oklch(0.72 0.15 25)}
+  .term .s{color:oklch(0.78 0.13 155)}
+  .term .a{color:oklch(0.78 0.11 255)}
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:28px;position:relative}
+  .step{padding:0 14px 0 0;position:relative}
+  .step .dot{width:28px;height:28px;border-radius:50%;background:#fff;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;position:relative;z-index:1}
+  .step:last-child .dot{background:var(--accent);border-color:var(--accent);color:#fff}
+  .step::before{content:"";position:absolute;top:14px;left:28px;right:0;height:1.5px;background:var(--line)}
+  .step:last-child::before{display:none}
+  .step .t{font-size:11px;font-family:var(--mono);color:var(--ink3);margin:14px 0 4px;letter-spacing:.04em}
+  .step .h{font-size:14px;font-weight:700;margin-bottom:6px}
+  .step p{font-size:12.5px;line-height:1.6}
+  .learn{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .card .k{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-bottom:8px;letter-spacing:.04em}
+  .card.acc{background:var(--accent-soft);border-color:transparent}
+  .card.acc .k{color:var(--accent)}
+
+  /* SKILLS */
+  table{width:100%;border-collapse:collapse;margin:24px 0 10px;font-size:13px}
+  th{font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--ink3);text-align:left;padding:0 12px 10px;letter-spacing:.04em;border-bottom:1.5px solid var(--ink)}
+  td{padding:16px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6;color:var(--ink2)}
+  td:first-child{font-weight:700;color:var(--ink);font-size:15px;width:120px}
+  .lvl{display:flex;gap:3px;margin-top:6px}
+  .lvl i{width:16px;height:4px;border-radius:2px;background:var(--line)}
+  .lvl i.on{background:var(--accent)}
+  .note{font-size:12px;color:var(--ink3);line-height:1.6}
+  .road{margin-top:30px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink)}
+  .road div{padding:16px 16px 0 0}
+  .road div+div{padding-left:16px;border-left:1px solid var(--line)}
+  .road .k{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.04em}
+  .road .h{font-size:14.5px;font-weight:700;margin:6px 0 8px}
+  .road p{font-size:12.5px;line-height:1.65}
+
+  /* ACTIVITY */
+  .act{display:grid;grid-template-columns:1fr 250px;gap:24px;padding:24px 0;border-top:1px solid var(--line)}
+  .act:first-of-type{border-top:none}
+  image-slot{display:block;width:250px;height:180px;border-radius:10px;background:var(--soft)}
+  .cap{font-family:var(--mono);font-size:10.5px;color:var(--ink3);margin-top:8px;line-height:1.5}
+  .bridge{margin-top:14px;padding:12px 14px;background:var(--soft);border-radius:8px;font-size:13px;line-height:1.6;color:var(--ink)}
+  .bridge b{font-family:var(--mono);color:var(--accent);font-weight:500;margin-right:6px}
+
+  /* CLOSING */
+  .closing{background:var(--ink);color:#f3f2ef;padding:0}
+  .closing .cover-inner{justify-content:center}
+  .closing blockquote{font-size:34px;font-weight:700;line-height:1.45;letter-spacing:-.03em;max-width:600px}
+  .closing blockquote span{color:oklch(0.75 0.12 255)}
+
+  @media print{
+    body{background:none;padding:0}
+    .page{margin:0;box-shadow:none;page-break-after:always}
+    @page{size:794px 1123px;margin:0}
+  }
+</style>
+</head>
+<body>
+
+<!-- 01 COVER -->
+<section class="page cover" data-screen-label="01 Cover">
+  <div class="cover-inner">
+    <div class="meta"><span>PORTFOLIO · 2026</span><span>성일정보고등학교 소프트웨어개발과 2학년</span></div>
+    <div class="role">BACKEND DEVELOPER · 지원</div>
+    <h1>박윤후</h1>
+    <p class="tagline">에러 메시지를 지나치지 않고<br><em>원인을 끝까지 찾아 해결하는</em> 개발자입니다.</p>
+    <div class="facts">
+      <div><div class="n">7<small>명</small></div><div class="l">팀 프로젝트 협업</div></div>
+      <div><div class="n">2<small>/ 5</small></div><div class="l">담당 화면 완성 (약 40%)</div></div>
+      <div><div class="n">1<small>건</small></div><div class="l">DB 연결 오류 직접 해결</div></div>
+    </div>
+    <div class="contact"><span>PORTFOLIO · 2026</span><span>BACKEND DEVELOPER</span></div>
+  </div>
+</section>
+
+<!-- 02 SUMMARY -->
+<section class="page" data-screen-label="02 Summary">
+  <div class="pg-head"><span><b>01</b> 한 장 요약</span><span>박윤후 · Backend</span></div>
+  <div class="eyebrow">// WHO I AM</div>
+  <h2>저는 오류의 원인을<br>끝까지 찾아 해결하는 사람입니다.</h2>
+  <p class="lead" style="margin-top:14px">Web JSP 동아리에서 7명이 함께 쇼핑몰 회원관리 웹을 만들고 있습니다. 화면 개발을 맡아 5개 중 2개를 완성했고, Eclipse 실행 중 발생한 DB 연결 오류를 오류 코드 분석으로 직접 해결했습니다.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">7<small>명</small></div><div class="l">동아리 팀 프로젝트<br>공동 작업</div></div>
+    <div class="stat"><div class="n">40<small>%</small></div><div class="l">전체 화면 5개 중<br>2개 완성 담당</div></div>
+    <div class="stat"><div class="n">1<small>건</small></div><div class="l">DB 연결 오류<br>원인 분석 → 재코딩 해결</div></div>
+  </div>
+
+  <div class="two">
+    <div>
+      <h3>기본 정보</h3>
+      <dl class="kv">
+        <dt>지원 직무</dt><dd>백엔드 개발</dd>
+        <dt>소속</dt><dd>성일정보고등학교<br>소프트웨어개발과 2학년</dd>
+        <dt>사용 기술</dt><dd><span class="tag acc">JAVA</span> <span class="tag acc">CSS</span> <span class="tag">JavaScript</span></dd>
+        <dt>학습 중</dt><dd>JAVA · DB 연동 (방과 후)</dd>
+      </dl>
+    </div>
+    <div>
+      <h3>목차</h3>
+      <ol class="toc">
+        <li><span><span class="k">02</span>대표 프로젝트</span><span>p.3</span></li>
+        <li><span><span class="k">03</span>트러블슈팅 — DB 연결 오류</span><span>p.4</span></li>
+        <li><span><span class="k">04</span>보유 기술 · 성장 계획</span><span>p.5</span></li>
+        <li><span><span class="k">05</span>활동 · 증빙</span><span>p.6</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="point">
+    <h3>이 포트폴리오에서 보여드리고 싶은 것</h3>
+    <ol>
+      <li><b>01</b><span>팀 안에서 맡은 분량을 <strong>끝까지 완성</strong>하는 책임감</span></li>
+      <li><b>02</b><span>오류를 만났을 때 <strong>오류 코드부터 읽고 원인을 좁혀가는</strong> 문제 해결 방식</span></li>
+      <li><b>03</b><span>부족한 점을 알고, <strong>백엔드(DB 연동)로 확장</strong>하기 위한 구체적인 다음 계획</span></li>
+    </ol>
+  </div>
+
+  <div class="pg-foot"><span>PARK YUNHU — PORTFOLIO</span><span>02 / 06</span></div>
+</section>
+
+<!-- 03 PROJECT -->
+<section class="page" data-screen-label="03 Project">
+  <div class="pg-head"><span><b>02</b> 대표 프로젝트</span><span>박윤후 · Backend</span></div>
+  <div class="eyebrow">// PROJECT</div>
+  <h2>쇼핑몰 회원관리 Web</h2>
+  <p class="lead">Web JSP 동아리 실습 과제 · 회원 정보를 관리하고 상품을 보여주는 웹사이트</p>
+
+  <div class="meta-grid">
+    <div><div class="k">PERIOD</div><div class="v">2026.03 ~<br>진행 중</div></div>
+    <div><div class="k">TEAM</div><div class="v">7명<br>(본인 포함)</div></div>
+    <div><div class="k">ROLE</div><div class="v">공동 작업<br>화면 개발 담당</div></div>
+    <div><div class="k">STACK</div><div class="v">JAVA (JSP)<br>CSS · Eclipse</div></div>
+  </div>
+
+  <h3>화면 완성 현황</h3>
+  <div class="screens">
+    <div class="scr done"><span>SCREEN</span><b>01</b><span>완성 · 담당</span></div>
+    <div class="scr done"><span>SCREEN</span><b>02</b><span>완성 · 담당</span></div>
+    <div class="scr todo"><span>SCREEN</span><b>03</b><span>세부 진행 중</span></div>
+    <div class="scr todo"><span>SCREEN</span><b>04</b><span>세부 진행 중</span></div>
+    <div class="scr todo"><span>SCREEN</span><b>05</b><span>세부 진행 중</span></div>
+  </div>
+  <div class="legend"><span><i style="background:var(--accent)"></i>본인 완성 2개 (약 40%)</span><span><i style="background:var(--soft);border:1px dashed #cfccc5"></i>세부사항 진행 중 3개</span></div>
+
+  <div class="sec">
+    <div class="lab">01 · PROBLEM<b>무엇을 풀려 했나</b></div>
+    <p>회원 정보를 관리하고 상품을 보여주는 쇼핑몰 화면이 필요했습니다. 팀은 전체 5개 화면을 나누어 개발하기로 했습니다.</p>
+  </div>
+  <div class="sec">
+    <div class="lab">02 · ACTION<b>내가 한 일</b></div>
+    <div>
+      <p>5개 중 2개 화면을 맡아 완성했습니다.</p>
+      <ul>
+        <li><span class="tag acc">CSS</span><span>항목에 마우스를 올리면 hover 효과가 나타나도록 구현</span></li>
+        <li><span class="tag acc">JAVA</span><span>항목을 클릭하면 해당 화면으로 이동하도록 구현</span></li>
+        <li><span class="tag acc">DB</span><span>DB 연결 코드 작성 및 실행 오류 해결 <span class="mono" style="font-size:11.5px;color:var(--ink3)">→ p.4</span></span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="lab">03 · RESULT<b>결과</b></div>
+    <div>
+      <ul style="margin-top:0">
+        <li><span class="tag ok">완성</span><span>담당 화면 2개 완성 (전체의 약 40%)</span></li>
+        <li><span class="tag ok">검증</span><span>작성한 코드에 문제가 없는지 담당 선생님께 검증 요청 → 확인 완료</span></li>
+        <li><span class="tag wip">과제</span><span>정량적인 사용자 테스트·대회 출품 실적은 아직 없음</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pg-foot"><span>PARK YUNHU — PORTFOLIO</span><span>03 / 06</span></div>
+</section>
+
+<!-- 04 TROUBLESHOOTING -->
+<section class="page" data-screen-label="04 Troubleshooting">
+  <div class="pg-head"><span><b>03</b> 트러블슈팅</span><span>박윤후 · Backend</span></div>
+  <div class="eyebrow">// TROUBLESHOOTING</div>
+  <h2>DB 연결 오류,<br>오류 코드를 한 줄씩 읽어 해결하다</h2>
+
+  <div class="term">
+    <div class="bar"><i></i><i></i><i></i></div>
+    <div><span class="c"># 쇼핑몰 회원관리 Web · Eclipse 실행</span></div>
+    <div><span class="a">$</span> run project</div>
+    <div><span class="e">✕ ERROR</span>  DB 연결 실패 — 작성한 연결 코드에서 오류 발생</div>
+    <div><span class="c"># 오류 코드를 하나씩 해석하며 잘못된 부분 추적</span></div>
+    <div><span class="a">→</span> 문제 원인 위치 확인</div>
+    <div><span class="a">→</span> 해당 부분 재코딩</div>
+    <div><span class="a">$</span> run project</div>
+    <div><span class="s">✓ OK</span>  정상 실행 확인</div>
+  </div>
+
+  <div class="flow">
+    <div class="step"><div class="dot">1</div><div class="t">SITUATION</div><div class="h">상황</div><p>DB 연결 코드를 작성했지만 Eclipse 실행 시 오류 발생</p></div>
+    <div class="step"><div class="dot">2</div><div class="t">ANALYZE</div><div class="h">분석</div><p>오류 코드를 하나씩 해석하며 메시지가 가리키는 위치를 추적</p></div>
+    <div class="step"><div class="dot">3</div><div class="t">ROOT CAUSE</div><div class="h">원인 확인</div><p>코드 중 잘못 작성된 부분을 직접 찾아냄</p></div>
+    <div class="step"><div class="dot">4</div><div class="t">FIX</div><div class="h">해결</div><p>문제 부분을 재코딩하여 오류 해결</p></div>
+  </div>
+
+  <div class="learn">
+    <div class="card acc">
+      <div class="k">WHAT I LEARNED</div>
+      <h3>"에러 메시지가 가장 빠른 힌트다"</h3>
+      <p>막연히 코드를 고치기보다, 오류 코드를 먼저 읽고 원인을 좁혀가는 것이 해결의 시작이라는 것을 경험했습니다. 이 경험이 백엔드 — 특히 DB 연동 — 에 관심을 갖게 된 계기입니다.</p>
+    </div>
+    <div class="card">
+      <div class="k">LIMIT & NEXT</div>
+      <h3>한계와 다음 계획</h3>
+      <p>전체 5개 화면 중 3개는 아직 세부사항이 완성되지 않았습니다. 남은 화면의 세부 기능을 먼저 완성하고, 방과 후에 배우고 있는 DB 연동 로직을 프로젝트에 직접 적용할 계획입니다.</p>
+    </div>
+  </div>
+
+  <div class="pg-foot"><span>PARK YUNHU — PORTFOLIO</span><span>04 / 06</span></div>
+</section>
+
+<!-- 05 SKILLS -->
+<section class="page" data-screen-label="05 Skills">
+  <div class="pg-head"><span><b>04</b> 보유 기술 · 성장 계획</span><span>박윤후 · Backend</span></div>
+  <div class="eyebrow">// SKILLS</div>
+  <h2>사용해 본 기술과<br>그 근거</h2>
+  <p class="lead">숙련도를 부풀리지 않고, 실제로 어디에 써봤는지를 기준으로 정리했습니다.</p>
+
+  <table>
+    <thead><tr><th>기술</th><th>사용 경험</th><th style="width:130px">적용 단계</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>JAVA</td>
+        <td>쇼핑몰 회원관리 웹 화면 개발 (2026.03~)<br>클릭 시 화면 이동 기능 구현 · 담당 화면 2개 · DB 연결 코드 작성</td>
+        <td><span class="tag ok">프로젝트 적용</span><div class="lvl"><i class="on"></i><i class="on"></i><i></i><i></i></div></td>
+      </tr>
+      <tr>
+        <td>CSS</td>
+        <td>같은 프로젝트에서 화면 스타일링 및 hover 효과 구현</td>
+        <td><span class="tag ok">프로젝트 적용</span><div class="lvl"><i class="on"></i><i class="on"></i><i></i><i></i></div></td>
+      </tr>
+      <tr>
+        <td>JavaScript</td>
+        <td>수업에서 학습</td>
+        <td><span class="tag">수업 학습</span><div class="lvl"><i class="on"></i><i></i><i></i><i></i></div></td>
+      </tr>
+      <tr>
+        <td>DB 연동</td>
+        <td>방과 후 수업에서 JAVA–DB 연동 학습 중 · 프로젝트에서 연결 오류 해결 경험</td>
+        <td><span class="tag wip">학습 중</span><div class="lvl"><i class="on"></i><i></i><i></i><i></i></div></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">※ 직무(백엔드 개발)와 직접 관련된 자격증은 아직 없습니다. 현재 방과 후 시간에 JAVA와 DB 연동을 학습하고 있습니다.</p>
+
+  <div class="road">
+    <div><div class="k">NOW</div><div class="h">화면 개발 경험</div><p>JAVA·CSS로 화면 2개 완성, DB 연결 오류 해결</p></div>
+    <div><div class="k">NEXT</div><div class="h">남은 화면 완성</div><p>프로젝트의 나머지 화면 3개 세부 기능 완성</p></div>
+    <div><div class="k">GOAL</div><div class="h">DB 연동 로직 적용</div><p>방과 후에 배운 DB 연동을 프로젝트에 직접 적용하며 백엔드로 확장</p></div>
+  </div>
+
+  <div class="pg-foot"><span>PARK YUNHU — PORTFOLIO</span><span>05 / 06</span></div>
+</section>
+
+<!-- 06 ACTIVITIES + CLOSING -->
+<section class="page" data-screen-label="06 Activities">
+  <div class="pg-head"><span><b>05</b> 활동 · 증빙</span><span>박윤후 · Backend</span></div>
+  <div class="eyebrow">// ACTIVITIES</div>
+  <h2 style="margin-bottom:18px">활동 기록</h2>
+
+  <div class="act">
+    <div>
+      <div class="mono" style="font-size:11px;color:var(--ink3)">2026.03 ~ 진행 중</div>
+      <h3 style="font-size:18px;margin:6px 0 12px">Web JSP 동아리</h3>
+      <dl class="kv">
+        <dt>역할</dt><dd>공동 작업 (화면 개발)</dd>
+        <dt>내 비중</dt><dd>전체 화면 5개 중 2개</dd>
+        <dt>결과</dt><dd>화면 2개 완성 · 담당 교사 코드 검증 확인</dd>
+      </dl>
+    </div>
+    <div>
+      <image-slot id="shot-shop" placeholder="쇼핑몰 회원관리 화면 캡처"></image-slot>
+      <div class="cap">쇼핑몰 회원관리 화면 — hover·클릭 이동 구현 — JAVA, CSS</div>
+    </div>
+  </div>
+
+  <div class="act">
+    <div>
+      <div class="mono" style="font-size:11px;color:var(--ink3)">2025.03 ~ 진행 중</div>
+      <h3 style="font-size:18px;margin:6px 0 12px">레프리 활동</h3>
+      <dl class="kv">
+        <dt>역할</dt><dd>레프리 (체육대회 진행 보조)</dd>
+        <dt>결과</dt><dd>체육대회 준비 및 팀워크 향상</dd>
+      </dl>
+      <div class="bridge"><b>→ 개발과의 연결</b>팀 프로젝트에서 다른 팀원과 협력하고 의견을 조율하는 데 도움이 된 경험입니다.</div>
+    </div>
+    <div>
+      <image-slot id="shot-referee" placeholder="레프리 활동 사진"></image-slot>
+      <div class="cap">레프리 활동 — 체육대회 진행 보조</div>
+    </div>
+  </div>
+
+  <div style="margin-top:auto;background:var(--ink);color:#f3f2ef;border-radius:12px;padding:30px 32px">
+    <div class="mono" style="font-size:11px;color:#8d8f95;letter-spacing:.06em;margin-bottom:12px">// CLOSING</div>
+    <p style="font-size:19px;font-weight:600;line-height:1.55;color:#f3f2ef;letter-spacing:-.02em">아직 배우는 과정이지만, 오류가 생겼을 때<br><span style="color:oklch(0.78 0.11 255)">원인을 끝까지 찾아 해결하는 자세</span>로 성장하는 백엔드 개발자가 되겠습니다.</p>
+    <div class="mono" style="font-size:12px;color:#a3a5aa;margin-top:18px;display:flex;gap:18px"><span>박윤후</span><span>PORTFOLIO · 2026</span></div>
+  </div>
+
+  <div class="pg-foot" style="margin-top:24px"><span>PARK YUNHU — PORTFOLIO</span><span>06 / 06</span></div>
+</section>
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
